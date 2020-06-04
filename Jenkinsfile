@@ -1,11 +1,12 @@
 pipeline {
-   agent any
-    // agent {
-    //     docker {
-    //         image 'node:6-alpine'
-    //         args '-p 3000:3000'
-    //     }
-    // }
+    
+//    agent any
+    agent {
+        docker {
+            image 'node:12.17-alpine'
+            // args '-p 3000:3000'
+        }
+    }
     environment {
         CI = 'true'
     }
@@ -27,11 +28,29 @@ pipeline {
                 
         //     }
         // }
-        stage('start') {
-            steps {
-                sh 'npm start'
-            }
-        }
+        // stage('start') {
+        //     steps {
+        //         sh 'npm start'
+        //     }
+        // }
     }
+
+    post{
+
+        success{
+
+            echo 'yesssssss'
+        }
+
+        failure {
+
+
+            echo 'noooooo'
+        }
+
+    }
+
+
+
 }
 
