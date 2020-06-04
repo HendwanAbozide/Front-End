@@ -1,10 +1,11 @@
 pipeline {
-    agent {
 
-        image 'node:12.17-alpine'
-        args '-p 80:3000'
+    agent any
+
+    //     image 'node:12.17-alpine'
+    //     args '-p 80:3000'
     
-    }
+    // }
     environment {
         CI = 'true'
     }
