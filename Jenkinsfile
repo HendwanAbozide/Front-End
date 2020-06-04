@@ -1,9 +1,13 @@
 pipeline {
-    
+
 //    agent any
     agent {
+        
         docker {
+            
+            label 'mydocker'
             image 'node:12.17-alpine'
+            
             // args '-p 3000:3000'
         }
     }
