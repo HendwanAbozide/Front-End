@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: SignUpForm.js</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                     
+                        <h1 class="navbar-item">Project Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-FavouriteArtist-Card.html">FavouriteArtist-Card</a></li><li><a href="module-FavouriteArtist-CardList.html">FavouriteArtist-CardList</a></li><li><a href="module-Static_Login-Facebook-Button.html">Static_Login-Facebook-Button</a></li><li><a href="module-Static_Login-SignUp-Header.html">Static_Login-SignUp-Header</a></li><li><a href="module-Static_LoginFooter.html">Static_LoginFooter</a></li><li><a href="module-Static_LoginForm.html">Static_LoginForm</a></li><li><a href="module-Static_SignUpFacebook.html">Static_SignUpFacebook</a></li><li><a href="module-Static_SignUpForm.html">Static_SignUpForm</a></li><li><a href="module-WebHomeInsideCard.html">WebHomeInsideCard</a></li><li><a href="module-WebHomeInsideList2.html">WebHomeInsideList2</a></li><li><a href="module-WebPlayer-Home-CardList.html">WebPlayer-Home-CardList</a></li><li><a href="module-WebPlayer-Home-SectionList.html">WebPlayer-Home-SectionList</a></li><li><a href="module-WebPlayer-HomeSection.html">WebPlayer-HomeSection</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>SignUpForm.js</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import './SignUp.css';
+import {Link,Redirect} from 'react-router-dom'
+
+/**
+ * @file SignUp Form 
+ *
+ * @module Static_SignUpForm
+ * @extends Component
+ * 
+ */
+/**
+  * @name SignUp_Form 
+  * @property {String} email input parameter 
+  * @property {String} confirmEmail input parameter 
+  * @property {String} password input parameter
+  * @property {String} nickname input parameter 
+  * @property {String} gender input parameter 
+  * @property {Number} date input parameter 
+  * @property {String} emailError is used for validating user's email  address
+  * @property {String} passwordError is used for validating user's password 
+  * @property {String} nickError is used for validating user's nickname
+  * @property {String} conFirmError is used for validating user's confirmEmail
+  * @property {String} genderError is used for validating user's gender
+  * @property {Boolean} SignedUp SignedUp equals to true if the user enters all the information correct
+  */
+
+class SignUpForm extends Component{
+    constructor(){
+        super()
+        this.state={
+            email: '',
+            confirmEmail: '',
+            password:'',
+            nickName: '',
+            date:'',
+            gender:'',
+            emailError: "",
+            passwordError: "",
+            nickError:"",
+            confirmEmailError:"",
+            genderError:"",
+            checked: true,
+            MockBack: false,
+            SignedUp: false
+        }
+        this.SubmitForm = this.SubmitForm.bind(this)
+    }
+
+    onSignUpChange=(event)=>{
+        this.setState({[event.target.name]: event.target.value })
+    }
+    validate = () => {
+        let eError='';
+        let cError='';
+        let nError='';
+        let pError='';
+        let gError='';
+        if (!this.state.email.includes("@")) {
+            eError = "Invalid email! Please enter the correct email address.";
+        }
+        if (!this.state.confirmEmail.includes("@")) {
+            cError = "Invalid email! Please enter the correct email address.";
+        }
+        if (this.state.confirmEmail != this.state.email) {
+            cError = "Please confirm your email address.";
+        }
+        if (!this.state.nickName) {
+            nError='What should we call you?';
+        }
+        if (!this.state.gender) {
+            gError='Please select your gender.';
+        }
+        if (!this.state.password){
+            pError='Please enter your password.'; 
+        }
+        if(this.state.password.length &lt; 8 &amp;&amp; this.state.password.length >= 1 ){
+            pError= 'The Password is too short.';
+        }
+        if(eError || pError || cError || nError || gError){
+            this.setState({emailError: eError, passwordError:pError});
+            this.setState({confirmEmailError: cError, nickError:nError, genderError:gError});
+            return false;
+        }
+        return true;
+    };
+    SubmitForm(event){
+        event.preventDefault()
+        const isValid = this.validate();
+        if (isValid) {
+        console.log(this.state);
+        // clear form
+        this.setState({emailError: '', passwordError:''});
+        this.setState({confirmEmailError: '', nickError:'', genderError:''});
+        }
+        else{
+            console.log('Invalid Form');
+        }
+        const {email ,confirmEmail, password, nickName,date,gender, MockBack,data} = this.state
+        // if (email == 'found' &amp;&amp; confirmEmail == 'found' &amp;&amp; password == 'admin' &amp;&amp; nickName == 'found' &amp;&amp; date=='06/07/1999' &amp;&amp; gender=='Male'  &amp;&amp; MockBack ){
+        //     this.setState({SignedUp: true})
+        //     sessionStorage.setItem("token","asdfjfskfbsfgyfewjsfdk")
+        // }
+        if (!MockBack){
+            const requestOptions = {
+                method: 'POST',
+                headers: { 
+                'Content-Type': 'application/x-www-form-urlencoded',  
+                'Accept': 'application/json'},
+                body: new URLSearchParams({
+                    'email':email,
+                    'confirmEmail':confirmEmail,
+                    'password':password,
+                    'nickname': nickName,
+                    'birthdate':date,
+                    'gender':gender
+                })
+            };
+            console.log(requestOptions.body)
+            fetch('http://localhost:5000/signup', requestOptions)
+            .then(console.log("fetching successfuly"))
+            .then(response => {
+                if (response.status &lt; 200 || response.status >= 300) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            }).catch(function(error){
+                console.log(error)
+            })
+            .then((token)=>{
+                console.log('the token is ',token)
+                sessionStorage.setItem('token',token)
+                if(token){this.setState({SignedUp:true})}
+            })
+        }
+    let token = sessionStorage.getItem('token')
+    console.log(token)
+    }
+    render(){
+        if (this.state.SignedUp == true){
+            return &lt;Redirect to='/WebFrame'>&lt;/Redirect>
+        }
+        return(
+            &lt;div className="tl">            
+                &lt;form onSubmit={this.SubmitForm} className="tl" >
+                    &lt;div class="row" >
+                        &lt;input
+                            className="SignUp_input"
+                            type="text"
+                            name='email'
+                            placeholder='Email address '
+                            className="form-control"
+                            value={this.state.email}
+                            onChange={event=>this.onSignUpChange(event)}       
+                        />
+                    &lt;/div>
+                    &lt;div style={{ fontSize: 12, color: "red" }}>
+                        {this.state.emailError}
+                    &lt;/div>
+                    &lt;br>&lt;/br>
+                    &lt;div class="row" >
+                        &lt;input
+                            type="text"
+                            className="tl"
+                            name='confirmEmail'
+                            placeholder='Confirm email'
+                            className="form-control"
+                            value={this.state.confirmEmail}
+                            onChange={event=>this.onSignUpChange(event)}
+                        />
+                    &lt;/div>
+                    &lt;div style={{ fontSize: 12, color: "red" }}>
+                        {this.state.confirmEmailError}
+                    &lt;/div>
+                    &lt;br>&lt;/br>
+                    &lt;div class="row">
+                        &lt;input
+                            type="password"
+                            className="SignUp_input"
+                            name='password'
+                            placeholder='Password'
+                            className="form-control"
+                            value={this.state.password}
+                            onChange={event=>this.onSignUpChange(event)}
+                        />
+                    &lt;/div>
+                    &lt;div style={{ fontSize: 12, color: "red" }}>
+                        {this.state.passwordError}
+                    &lt;/div>
+                    &lt;br>&lt;/br>
+                    &lt;div class="row" >
+                        &lt;input
+                            className="SignUp_input"
+                            type="text"
+                            name='nickName'
+                            placeholder='What should we call you?'
+                            className="form-control"
+                            value={this.state.nickName}
+                            onChange={event=>this.onSignUpChange(event)}
+                        />
+                    &lt;/div>
+                    &lt;div style={{ fontSize: 12, color: "red" }}>
+                        {this.state.nickError}
+                    &lt;/div>
+
+                    &lt;div class="row">
+                        &lt;label className="SignUp_birth_label"> Date of birth    &lt;/label>
+                        &lt;input
+                            type="date"
+                            name='date'
+                            className="SignUp_input"
+                            placeholder='Date'
+                            className="form-control"
+                            min="1950-01-01" max="2010-12-31" required
+                            value={this.state.date}
+                            onChange={event=>this.onSignUpChange(event)}
+                        />
+                    &lt;/div>
+                    &lt;br>&lt;/br>
+                    &lt;div class="row" className='tl'>
+                        &lt;p className="SignUp_p_gray" className='tl'>
+                            &lt;label class="SignUp_radiolabel">&lt;input className="SignUp_input" type="radio"  name="gender" value="male" onChange={event=>this.onSignUpChange(event)}/>Male&lt;/label>
+                            &lt;label class="SignUp_radiolabel">&lt;input className="SignUp_input" type="radio" name="gender" value="female" onChange={event=>this.onSignUpChange(event)}/>Female&lt;/label>
+                            &lt;div style={{ fontSize: 12, color: "red" }}>
+                                {this.state.genderError}
+                            &lt;/div>
+                        &lt;/p> 
+                    &lt;/div>
+                    
+                    &lt;div class="row" class="form-check" >
+                        &lt;p className="SignUp_p_gray_label">&lt;label> 
+                        &lt;input
+                            className="SignUp_input" 
+                            type="checkbox"
+                            name='checked'
+                            value={this.state.checked}
+                            onChange={event=>this.onSignUpChange(event)}  
+                        />
+                        Share my registration data with Spotify's content providers for marketing purposes. 
+                        &lt;/label>&lt;/p>
+                    &lt;/div>
+                    &lt;div className='tc'>            
+                &lt;div>
+                    &lt;p className="tc" className="SignUp_p_black">
+                        By clicking on Sign up, you agree to Spotify's &lt;a className="SignUp_a" href="#" >Terms and Conditions of Use&lt;/a>.
+                        &lt;br>&lt;/br>
+                    &lt;/p>
+                    &lt;p className="tc" className="SignUp_p_black">  To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's &lt;a className="SignUp_a" href="#" >Privacy Policy&lt;/a>. &lt;/p>
+                &lt;/div>
+                &lt;div >
+                    &lt;button type='submit' className=" SignUp_button SignUp_button_Signup"> SIGN UP &lt;/button>
+                &lt;/div>
+                &lt;div>
+                    &lt;p className='tc' className="SignUp_p_black" >
+                        Already have an account? 
+                        {/* &lt;Link to="/Login/" target="_blank"> Login &lt;/Link> */}
+                        &lt;Link to='Login'>&lt;a className="SignUp_a" href="#"> Login&lt;/a>&lt;/Link>
+                    &lt;/p>
+                &lt;/div>
+            &lt;/div>
+                &lt;/form>
+            &lt;/div>
+        );
+    }
+} 
+export default SignUpForm;</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:33:53 GMT+0200 (Eastern European Standard Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
