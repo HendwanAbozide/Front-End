@@ -10,21 +10,23 @@ pipeline {
         CI = 'true'
     }
     stages {
+
         stage('Build') {
+            
             steps {
                 sh 'npm install'
             }
         }
-        stage('Test') {
-           steps {
-                sh 'npm run build'
-            }
-        }
-        stage('Deliver') {
-            steps {
+        // stage('Test') {
+        //    steps {
+        //         sh 'npm run build'
+        //     }
+        // }
+        // stage('Deliver') {
+        //     steps {
 
-              sh 'npm start'
-            }
+        //       sh 'npm start'
+        //     }
         }
     }
 }
