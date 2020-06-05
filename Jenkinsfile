@@ -5,14 +5,14 @@ pipeline {
         
         docker {
 
-            label 'mydocker'
+            // label 'mydocker'
             image 'node:12.17-alpine'
-            args '-p 3000:3000'
+            // args '-p 3000:3000'
         }
     }
-    environment {
-        CI = 'true'
-    }
+    // environment {
+    //     CI = 'true'
+    // }
     stages {
         stage('Build') {
             steps {
