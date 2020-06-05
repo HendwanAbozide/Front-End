@@ -6,7 +6,7 @@ pipeline {
         docker {
 
             // label 'mydocker'
-            image 'node:12.17-alpine'
+            image 'node:12.17'
             // args '-p 3000:3000'
         }
     }
