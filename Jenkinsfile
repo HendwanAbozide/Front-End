@@ -1,15 +1,15 @@
 pipeline {
 
-//    agent any
-    agent {
+    agent any
+    // agent {
         
-        docker {
+    //     docker {
 
-            // label 'mydocker'
-            image 'node:12.17'
-            // args '-p 3000:3000'
-        }
-    }
+    //         // label 'mydocker'
+    //         image 'node:12.17'
+    //         // args '-p 3000:3000'
+    //     }
+    // }
     // environment {
     //     CI = 'true'
     // }
