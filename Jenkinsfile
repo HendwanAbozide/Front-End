@@ -19,6 +19,17 @@ pipeline {
     environment {
         CI = 'true'
     }
+
+    stages {
+
+        stage('Testing build'){
+
+             sh 'node --version'
+
+        }
+
+
+    }
     // stages {
     //     stage('Build') {
     //         steps {
