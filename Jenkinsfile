@@ -30,12 +30,12 @@ pipeline {
         }
 
 
-        stage('Package'){
-            steps {
+        // stage('Package'){
+        //     steps {
 
-             sh 'node package -DskipTests'
-            }
-        } 
+        //      sh 'node package -DskipTests'
+        //     }
+        // } 
 
 
         stage('Build Docker Image'){
