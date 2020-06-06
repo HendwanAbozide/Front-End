@@ -1,7 +1,14 @@
 pipeline {
 
     // agent any
-    
+
+    environment {
+    registry = "hendwanabozide123/pacify-frontend"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+    }
+
+
     agent { dockerfile true }
     // tools {nodejs "mynode3"}
     
@@ -30,25 +37,25 @@ pipeline {
         }
 
 
-        // stage('Package'){
-        //     steps {
+        stage('Package'){
+            steps {
 
-        //      sh 'node package -DskipTests'
-        //     }
-        // } 
+             sh 'node package -DskipTests'
+            }
+        } 
 
 
-        // stage('Build Docker Image'){
-        //     steps{
+        stage('Build Docker Image'){
+            steps{
 
-        //         // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
-        //         script{
+                // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
+                script{
 
-        //             dockerImage=docker.build("hendwanabozide123/pacify-frontend:${env.Build_TAG}")
+                    dockerImage=docker.build registry + ":$BUILD_NUMBER"
 
-        //         }
+                }
 
-        //     }
+            }
 
 
         // }
@@ -63,12 +70,20 @@ pipeline {
                         dockerImage.push('latest');
                     }
                 }
-
-
             }
 
-
         }
+
+        // stage('Cleaning up'){
+        //     steps{
+
+
+        //         // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
+        //         sh "docker rmi $registry:$BUILD_NUMBER"
+
+        //     }
+
+        // }
 
 
 
