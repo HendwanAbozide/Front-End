@@ -58,7 +58,7 @@ pipeline {
             }
 
 
-        // }
+         }
         stage('Push Docker Image'){
             steps{
 
@@ -73,7 +73,7 @@ pipeline {
             }
 
         }
-
+    }
         // stage('Cleaning up'){
         //     steps{
 
@@ -85,9 +85,8 @@ pipeline {
 
         // }
 
+/////////////////////////////////
 
-
-    }
     // stages {
     //     stage('Build') {
     //         steps {
@@ -142,7 +141,6 @@ pipeline {
         }
 
     }
-
 
 
 }
