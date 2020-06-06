@@ -24,7 +24,13 @@ pipeline {
         }
         
         stage('Start the App') {
+
+            when {
+                branch 'development'
+            }
+            
             steps {
+
                  sh'chmod u+r+x deliver.sh'
                  sh './deliver.sh'
                  input message: 'Finished using the web site? (Click "Proceed" to continue)'
