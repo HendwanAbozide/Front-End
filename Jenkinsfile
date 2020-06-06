@@ -3,15 +3,12 @@ pipeline {
     agent any
     tools {nodejs "mynode3"}
     
-    // agent {
+    agent {
         
-    //     docker {
-
-    //         // label 'mydocker'
-    //         // image 'node:12.17'
-    //         args '-p 3000:3000'
-    //     }
-    // }
+       
+            args '-p 3000:3000'
+        
+    }
 
     environment {
         CI = 'true'
@@ -26,9 +23,9 @@ pipeline {
         stage('Development Stage') {
 
             steps {
-
-                 sh'chmod u+r+x deliver.sh'
-                 sh './deliver.sh'
+                 echo 'development stage started'
+                 sh'chmod u+r+x development.sh'
+                 sh './development.sh'
                  input message: 'Finished using the web site? (Click "Proceed" to continue)'
                  sh'chmod u+r+x kill.sh'
                  sh './kill.sh'
@@ -39,6 +36,7 @@ pipeline {
         stage('Production Stage') {
 
             steps {
+                 echo 'production stage started'
 
                  sh'chmod u+r+x production.sh'
                  sh './production.sh'
