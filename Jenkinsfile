@@ -1,11 +1,12 @@
 pipeline {
 
-    agent any
+    // agent any
     tools {nodejs "mynode3"}
     
     agent {
 
         docker{
+
             image 'node:12.17-alpine'
             args '-p 3000:3000'
 
