@@ -30,6 +30,47 @@ pipeline {
         }
 
 
+        stage('Package'){
+            steps {
+
+             sh 'node package -DskipTests'
+            }
+        } 
+
+
+        stage('Build Docker Image'){
+            steps{
+
+                // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
+                script{
+
+                    dockerImage=docker.build("hendwanabozide123/pacify-frontend:${env.Build_TAG}")
+
+                }
+
+            }
+
+
+        }
+        stage('Push Docker Image'){
+            steps{
+
+                script{
+
+                    docker.withRegistry('','dockerhub'){
+
+                        dockerImage.push();
+                        dockerImage.push('latest');
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
 
     }
     // stages {
