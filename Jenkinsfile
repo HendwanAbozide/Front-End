@@ -23,12 +23,8 @@ pipeline {
             }
         }
         
-        stage('Start the App') {
+        stage('Development Stage') {
 
-            when {
-                branch 'development'
-            }
-            
             steps {
 
                  sh'chmod u+r+x deliver.sh'
@@ -36,7 +32,19 @@ pipeline {
                  input message: 'Finished using the web site? (Click "Proceed" to continue)'
                  sh'chmod u+r+x kill.sh'
                  sh './kill.sh'
-                //input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                
+            }
+        }
+
+        stage('Production Stage') {
+
+            steps {
+
+                 sh'chmod u+r+x production.sh'
+                 sh './production.sh'
+                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                 sh'chmod u+r+x kill.sh'
+                 sh './kill.sh'
                 
             }
         }
