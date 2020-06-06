@@ -8,8 +8,8 @@ pipeline {
     dockerImage = ''
     }
 
-
-    agent { dockerfile true }
+    agent any
+    // agent { dockerfile true }
 
     //////////////////////////////////////
     // tools {nodejs "mynode3"}
@@ -30,6 +30,13 @@ pipeline {
     // }
 
     stages {
+
+        stage('Cloning our Git') {
+            
+            steps {
+                git 'https://github.com/HendwanAbozide/Front-End.git'
+             }
+        }
 
         stage('Testing build'){
             steps {
