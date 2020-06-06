@@ -19,46 +19,45 @@ pipeline {
     environment {
         CI = 'true'
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'chown -R 111:116 "/.npm"'
-                sh 'npm install'
-            }
-        }
+    // stages {
+    //     stage('Build') {
+    //         steps {
+    //             sh 'npm install'
+    //         }
+    //     }
         
-        stage('Development Stage') {
+    //     stage('Development Stage') {
 
-            steps {
-                 echo 'development stage started'
-                 sh'chmod u+r+x development.sh'
-                 sh './development.sh'
-                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                 sh'chmod u+r+x kill.sh'
-                 sh './kill.sh'
+    //         steps {
+    //              echo 'development stage started'
+    //              sh'chmod u+r+x development.sh'
+    //              sh './development.sh'
+    //              input message: 'Finished using the web site? (Click "Proceed" to continue)'
+    //              sh'chmod u+r+x kill.sh'
+    //              sh './kill.sh'
                 
-            }
-        }
+    //         }
+    //     }
 
-        stage('Production Stage') {
+    //     stage('Production Stage') {
 
-            steps {
-                 echo 'production stage started'
+    //         steps {
+    //              echo 'production stage started'
 
-                 sh'chmod u+r+x production.sh'
-                 sh './production.sh'
-                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                 sh'chmod u+r+x kill.sh'
-                 sh './kill.sh'
+    //              sh'chmod u+r+x production.sh'
+    //              sh './production.sh'
+    //              input message: 'Finished using the web site? (Click "Proceed" to continue)'
+    //              sh'chmod u+r+x kill.sh'
+    //              sh './kill.sh'
                 
-            }
-        }
-        // stage('start') {
-        //     steps {
-        //         sh 'npm start'
-        //     }
-        // }
-    }
+    //         }
+    //     }
+    //     // stage('start') {
+    //     //     steps {
+    //     //         sh 'npm start'
+    //     //     }
+    //     // }
+    // }
 
     post{
 
