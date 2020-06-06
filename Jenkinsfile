@@ -1,7 +1,7 @@
 pipeline {
 
     // agent any
-
+//////////////////////////////////////////
     environment {
     registry = "hendwanabozide123/pacify-frontend"
     registryCredential = 'dockerhub'
@@ -10,6 +10,8 @@ pipeline {
 
 
     agent { dockerfile true }
+
+    //////////////////////////////////////
     // tools {nodejs "mynode3"}
     
 
@@ -23,9 +25,9 @@ pipeline {
         
     // }
 
-    environment {
-        CI = 'true'
-    }
+    // environment {
+    //     CI = 'true'
+    // }
 
     stages {
 
