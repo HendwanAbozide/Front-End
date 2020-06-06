@@ -38,20 +38,20 @@ pipeline {
         // } 
 
 
-        stage('Build Docker Image'){
-            steps{
+        // stage('Build Docker Image'){
+        //     steps{
 
-                // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
-                script{
+        //         // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
+        //         script{
 
-                    dockerImage=docker.build("hendwanabozide123/pacify-frontend:${env.Build_TAG}")
+        //             dockerImage=docker.build("hendwanabozide123/pacify-frontend:${env.Build_TAG}")
 
-                }
+        //         }
 
-            }
+        //     }
 
 
-        }
+        // }
         stage('Push Docker Image'){
             steps{
 
