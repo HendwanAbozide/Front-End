@@ -60,7 +60,7 @@ pipeline {
                 // "docker build -t hendwanabozide123/pacify-frontend:$env.Build_TAG"
                 script{
 
-                    dockerImage=docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage=docker.build registry + ":$BUILD_TAG"
 
                 }
 
@@ -76,7 +76,7 @@ pipeline {
                     docker.withRegistry('','dockerhub'){
 
                         dockerImage.push();
-                        dockerImage.push('latest');
+                        // dockerImage.push('latest');
                     }
                 }
             }
