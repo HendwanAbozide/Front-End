@@ -22,7 +22,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo chown -R 111:116 "/.npm"'
+                sh 'chown -R 111:116 "/.npm"'
                 sh 'npm install'
             }
         }
