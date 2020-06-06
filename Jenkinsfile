@@ -1,18 +1,19 @@
 pipeline {
 
     // agent any
-    tools {nodejs "mynode3"}
+    agent { dockerfile true }
+    // tools {nodejs "mynode3"}
     
-    agent {
 
-        docker{
+    // agent {
 
-            image 'node:12.17-alpine'
-            args '-p 3000:3000'
+    //     docker{
+    //         image 'node:12.17-alpine'
+    //         args '-p 3000:3000'
 
-        }
+    //     }
         
-    }
+    // }
 
     environment {
         CI = 'true'

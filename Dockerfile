@@ -1,9 +1,11 @@
-FROM node:12.17.0-alpine
+FROM node:12.17-alpine AS builder
 WORKDIR /app
-COPY . /app
-RUN npm install
-EXPOSE 80
-CMD node server.js
+COPY . .
+RUN yarn
+RUN yarn run build
 
-#ENTRYPOINT ["node", "index.js"]
-#COPY package.json /app
+FROM node:12.17-alpine
+RUN yarn global add serve
+WORKDIR /app
+COPY --from=builder /app/build .
+CMD ["serve", "-p", "80", "-s", "."]
